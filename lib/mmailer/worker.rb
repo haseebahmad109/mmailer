@@ -22,7 +22,7 @@ module Mmailer
           when :started
             load_config
             index ||= from; index += 1
-            user = collection.shift
+            user = collection.first.delete
             if not user.email.nil?
               obj.puts "#{index}: #{user.email}"
               mailHelper.send_email(user)
@@ -51,7 +51,19 @@ module Mmailer
                         obj.puts "Collection needs to be an array or a proc object. It appears to be neither."
                         stop
                     end
-      collection.shift(from)
+      #collection.shift(from)
+      i = 0
+      loop do
+        puts "index: #{i}"
+        if !collection.empty?
+          collection.first.delete
+          if i >= from
+            break
+          end
+        else
+          break
+        end
+      end
       obj.puts "Loaded #{collection.count} entries"
     end
 

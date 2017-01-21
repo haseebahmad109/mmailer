@@ -14,6 +14,7 @@ module Mmailer
   require 'mmailer/error_handling'
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
+  require 'mmailer/connect'
 
 ## read config
   config = File.join(Dir.pwd, 'config.rb')

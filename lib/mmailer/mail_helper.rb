@@ -39,7 +39,10 @@ module Mmailer
 
       case ENV['MMAILER_ENV']
         when "production"
-          try { mail.deliver! }
+          try { 
+            mail.deliver!
+            UsersCompleted.create email: user.email, name: user.name
+          }
         when "development"
           puts mail.to_s
         else
